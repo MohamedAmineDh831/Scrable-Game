@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,11 +13,53 @@ class PostController extends Controller
         return view('test');
     }
 
-    function index1(){
+    function inscrit(){
         return view('Identification.inscrit');
     }
 
-    function index2(){
+    function inscrit_post(Request $request){
+
+        $username = $request->input('Username');
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        $verifUsername = ['name'=>$username];
+        $verifEmail = ['email'=>$email];
+        $user_name = User::where($verifUsername)->get();
+        $user_email = User::where($verifEmail)->get();
+        if(sizeof($user_name)!=0){
+            dd('username deja utilisé');
+        }
+        else {
+            if(sizeof($user_email)!=0){
+                dd('email deja utilisé');
+            }
+            else {
+
+                $post = new User();
+                $post->name = $username;
+                $post->email = $email;
+                $post->password = $password;
+                if ($request->hasfile('picture')) {
+                    $file = $request->file('picture');
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = time() . '.' . $extension;
+                    $file->move('uploads/chat/', $filename);
+                    $post->image = $filename;
+
+                } else {
+                    return $request;
+                    $post->image = '';
+                }
+                $post->save();
+
+                $post->save();
+                return $post;
+            }
+        }
+    }
+
+    function login(){
         return view('Identification.login');
     }
 }

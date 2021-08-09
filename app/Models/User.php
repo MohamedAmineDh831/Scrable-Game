@@ -52,4 +52,8 @@ class User extends Authenticatable
      * @var mixed
      */
     private $password;
+    /**
+     * @var mixed|string
+     */
+    private $image;
 }
