@@ -53,13 +53,33 @@ class PostController extends Controller
                 }
                 $post->save();
 
-                $post->save();
                 return $post;
             }
         }
     }
 
     function login(){
+
         return view('Identification.login');
+    }
+
+    function login_post(Request $request){
+
+        $username = $request->input('Username');
+        $password = $request->input('password');
+
+        $verifUsername = ['name'=>$username];
+        $user_name = User::where($verifUsername)->get();
+
+        if(sizeof($user_name)==0){
+            dd('vous n\'avez pas de compte');
+        }
+        else if($user_name[0]->password != $password){
+            dd('mot de passe incorrect');
+        }
+        else{
+            return $user_name[0];
+        }
+
     }
 }
