@@ -59,7 +59,14 @@
             if("0123456789".includes(username[0])){
                 verif = false;
             }
-           // console.log('username : '+verif);
+            value = username.toUpperCase();
+            for (let i = 0; i < value.length; i++){
+                if ((!(value[i] >= "A" && value[i] <= "Z"))&&(!(value[i] >= "0" && value[i] <= "9")))
+                {
+                    verif = false;
+                }
+            }
+
             return verif;
 
         }
