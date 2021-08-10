@@ -16,9 +16,10 @@ class CreateNizarsTable extends Migration
         Schema::create('nizars', function (Blueprint $table) {
             $table->id();
             $table->string('typepartie');
-            $table->boolean('complet')->default(0);
+            $table->integer('count');
             $table->timestamps();
-            $table->timestamps();
+ 
+          
            
 
         });
