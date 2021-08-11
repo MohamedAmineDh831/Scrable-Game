@@ -20,29 +20,43 @@ class PostController extends Controller
         return view('partie');
     }
      function affichage(Request $request){
+         $c=0;
         $post=new nizar();
         #$post->typepartie=$request->input("tp");
-        $post->count=10;
+        $post->count=7;
         $post->typepartie=$request->input("tp");
+        $k=$request->input("tp");
         $post->save();
         #$users = DB::table('nizars')->select('id','typepartie')->get();
         $users = DB::select('select * from nizars ');
         #$users = DB::select('select count from  nizars where typepartie=10');
-        $n=nizar::where('typepartie','=','16')->get();
+       # $n=nizar::where('typepartie','=','10')->get();
         #dd($n);
-        foreach($n as $value){
+        $m=1;
+        DB::update('update nizars set count = ? where typepartie>count   and typepartie = ?',['count+'.$m,$k]);
+        #DB::table("nizars")->where('id', $k,'typepartie>count')->increment('count');
+        $id=5;
+$votes=20;
+
+     /*   foreach($n as $value){
            if( $value['typepartie']>$value['count'] )
            {
-               $post->count+=1;
-               $post->save();
+            DB::update('update student set count = ? where typepartie>count',[3]);
+            $value['count']+=1;
+               #$post->count+=1;
+               #$post->save();
                echo $value['id'];
            }
+           
         }
-        #if($n->typepartie!=$n->count)
+        */
+        /*if($c)
         {
-            echo( "hey hey");
+            $post->count+=1;
+            $post->typepartie=$request->input("tp");
+            $post->save();
         }
-      
+      */
         #return view('partie',['users'=>$users]);
         #dd("insertion valide");
         }
