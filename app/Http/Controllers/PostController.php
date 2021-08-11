@@ -28,7 +28,7 @@ class PostController extends Controller
         $post->count=50;
         $post->typepartie=$request->input("tp");
         $k=$request->input("tp");
-        $post->save();
+       
         #$users = DB::table('nizars')->select('id','typepartie')->get();
         $users = DB::select('select * from nizars ');
         #$users = DB::select('select count from  nizars where typepartie=10');
@@ -44,8 +44,17 @@ class PostController extends Controller
               echo"uhuh";              
              echo $value['id'];
            }
+           else
+           {
+            $post->count=50;
+            $post->typepartie=$request->input("tp");
+            $post->save();
+           
+            echo"nizar";
+           }
            
         }
+
     
         /*if($c)
         {
