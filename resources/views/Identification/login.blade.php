@@ -6,7 +6,6 @@
         <div class="main-agileinfo">
             <div class="agileits-top">
                 <form action="#" method="post">
-                    @csrf
                     <input class="text" type="text" name="Username" placeholder="Username" required="">
                     <input class="text" type="password" name="password" placeholder="Password" required="">
                     <div class="clear"> </div>
