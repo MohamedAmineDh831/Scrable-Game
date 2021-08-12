@@ -41,16 +41,19 @@ class PostController extends Controller
            {
              $value['count']+=1;
              $value->save();
-              echo"uhuh";              
-             echo $value['id'];
+                echo "nizar";        
+             echo $value['count'];
+             return view('welcome');
            }
            else
            {
-            $post->count=50;
+            $post->count=55;
             $post->typepartie=$request->input("tp");
             $post->save();
+            echo $value['count'];
+            return view('welcome');
            
-            echo"nizar";
+          
            }
            
         }
