@@ -35,7 +35,12 @@ class PostController extends Controller
         $n=nizar::where('typepartie','=',$k)->get();
         
 
-
+ if(!count($n))
+ {
+    $post->typepartie=$request->input("tp");  
+    $post->count=55;
+    $post->save();
+ }
   foreach($n as $value){
            if( $value['typepartie']>$value['count'] )
            {
@@ -47,10 +52,12 @@ class PostController extends Controller
            }
            else
            {
+            $post->typepartie=$request->input("tp");  
             $post->count=55;
-            $post->typepartie=$request->input("tp");
             $post->save();
+           
             echo $value['count'];
+            
             return view('welcome');
            
           
