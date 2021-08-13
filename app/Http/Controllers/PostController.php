@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\nizar;
+use App\Models\play;
 class PostController extends Controller
 
 {
@@ -20,6 +21,8 @@ class PostController extends Controller
         return view('partie');
     }
      function affichage(Request $request){
+         $play=new play();
+        
          $c=0;
         $post=new nizar();
         $post->typepartie=$request->input("tp");
@@ -39,37 +42,58 @@ class PostController extends Controller
     $post->save();
  }
  */
- /*for($i=0;$i<count($n);$i++)
- {
-if($n[$i]['typepartie']==$n[$i]['count'])
+$c=0;
+for($i=0;$i<count($n);$i++)
 {
- 
-    unset($n[$i]);
+    if($n[$i]['typepartie']==$n[$i]['count'])
+    $c++;
 }
+ if($c==count($n))
+ {
 
-
+    $post->typepartie=$request->input("tp");  
+    $post->count=55;
+    $post->save();
+   
+    
+    
+    return view('welcome');
  }
- */
+$users=$n[$c];
+{
 while($users['typepartie']>$users['count'])
            
            {
-             $users->count=$users->count+1;
-             $post->save();
+            $play->user=$request->input('us');
+            $play->idpartie=$users['id'];
+            $play->save();
+             $users['count']+=1;
+             $users->save();
               echo 'dekhel'; 
-                echo "nizar";        
+                echo "nizar";     
+                echo $users['id'];   
                    echo $users->count;
+                   $p=play::where('id','=','1')->get();
+                   $u=$p[0]['idpartie'];
+                   $r=nizar::where('id','=',$u)->get();
+                   echo $r[0]['count'];
+
+              
                  return view('welcome');
            }
-        
+           if($users['typepartie']==$users['count'])
            {
-
-            $post->typepartie=$request->input("tp");  
-            $post->count=55;
-            $post->save();
+               echo 'play game';
+           return view('welcome');
            
-            echo $post->count;
+           }
+          
+        
+         
+        
+        
+
             
-            return view('welcome');
            
           
            }
