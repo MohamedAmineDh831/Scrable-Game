@@ -58,9 +58,9 @@ for($i=0;$i<count($n);$i++)
     $a=play::where('user','=',$m)->get();
     $b=$a[0]['idpartie'];
     $c=nizar::where('id','=',$b)->get();
-    $o=$c[0]['count'];
+    $o=$c['count'];
     echo 'play game';
-    return view ('affichage',compact($o));
+   return view('attendre');
     
  
  }
@@ -82,13 +82,13 @@ if($users['typepartie']>$users['count'])
                   $b=$a[0]['idpartie'];
                   $c=nizar::where('id','=',$b)->get();
                   $o=$c[0]['count'];
-             
+                  return view('attendre');
                   /* $p=play::where('idpartie','=',177)->get();
                    $u=$p[0]['idpartie'];
                    $r=nizar::where('id','=',$u)->get();
                    echo $r[0]['count']; */
 
-                   return view ('affichage',compact($o));
+               
        
            }
           
@@ -134,6 +134,20 @@ if($users['typepartie']>$users['count'])
       */
         #return view('partie',['users'=>$users]);
         #dd("insertion valide");
+        }
+        public function base(Request $request)
+        {
+            $play=new play();
+            $user= $play->user=$request->input('usr');;
+            $a=play::where('user','=',$user)->get();
+            $b=$a[0]['idpartie'];
+            $c=nizar::where('id','=',$b)->get();
+            $o=$c[0]['count'];
+         
+            return view('liste',[
+                'o'=>$o
+            ]);
+
         }
    
 }

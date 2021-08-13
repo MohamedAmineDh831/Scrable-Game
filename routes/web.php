@@ -22,5 +22,6 @@ Route::get('/',[PostController::class,'test'])->name('test');
 #Route::get('/posts',[PostController::class,'index']);
 Route::get('/nizar', [PostController::class, 'partie']);
 Route::post('/nizar/n', [PostController::class, 'affichage'])->name('nizar.affichage');
+Route::post('/nizar/n/base', [PostController::class, 'base'])->name('n.base');
 
 
