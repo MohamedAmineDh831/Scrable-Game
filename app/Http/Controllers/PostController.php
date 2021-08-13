@@ -66,7 +66,7 @@ for($i=0;$i<count($n);$i++)
  }
  $users=$n[$c];
 {
-while($users['typepartie']>$users['count'])
+if($users['typepartie']>$users['count'])
            
            {
             $play->user=$request->input('us');
