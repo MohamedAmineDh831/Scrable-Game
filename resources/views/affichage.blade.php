@@ -12,13 +12,11 @@
 <td>City Name</td>
 <td>Email</td>
 </tr>
-@foreach ($users as $user)
-<tr>
-<td>{{ $user->id }}</td>
-<td>{{ $user->typepartie}}</td>
-<td>{{ $user->count }}</td>
-</tr>
-@endforeach
+
+</p>
+         <input type="submit" value="Submit"><a href="{{route('nizar.affichage')}}"
+</p>
+
 </table>
 </body>
 </html>

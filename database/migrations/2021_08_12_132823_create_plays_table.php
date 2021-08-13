@@ -16,6 +16,8 @@ class CreatePlaysTable extends Migration
         Schema::create('plays', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('user');
+            $table->integer('idpartie');
         });
     }
 
