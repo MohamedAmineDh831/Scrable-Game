@@ -55,9 +55,10 @@ for($i=0;$i<count($n);$i++)
     $post->count=55;
     $post->save();
    
-    
-    
+    echo 'play game';
     return view('welcome');
+    
+ 
  }
 $users=$n[$c];
 {
@@ -65,39 +66,29 @@ while($users['typepartie']>$users['count'])
            
            {
             $play->user=$request->input('us');
-            $play->idpartie=$users['id'];
+           $m=$request->input('us');
+            $play->idpartie=177;
             $play->save();
              $users['count']+=1;
-             $users->save();
-              echo 'dekhel'; 
-                echo "nizar";     
-                echo $users['id'];   
-                   echo $users->count;
-                   $p=play::where('id','=','1')->get();
+             $users->save();   
+               # $y=$users['id'];
+               # echo $users['id'];   
+                  $a=play::where('user','=',$m)->get();
+                  $b=$a[0]['idpartie'];
+                  $c=nizar::where('id','=',$b)->get();
+                  $o=$c[0]['count'];
+                  echo $o;
+                  /* $p=play::where('idpartie','=',177)->get();
                    $u=$p[0]['idpartie'];
                    $r=nizar::where('id','=',$u)->get();
-                   echo $r[0]['count'];
-
+                   echo $r[0]['count']; */
+return view ('welcome');
               
-                 return view('welcome');
-           }
-           if($users['typepartie']==$users['count'])
-           {
-               echo 'play game';
-           return view('welcome');
-           
+       
            }
           
-        
-         
-        
-        
-
-            
-           
-          
            }
-        /* else  if(  $value['typepartie']==$value['count'])
+        /* else  if(  $value['typepartie']==$value['count'])s
            {  echo "nizar";        
             echo $value['count'];
                echo "eq";
