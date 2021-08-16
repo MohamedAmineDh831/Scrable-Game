@@ -1,4 +1,4 @@
-(function($) {
+/*(function($) {
 
     $(".toggle-password").click(function() {
 
@@ -11,4 +11,11 @@
         }
       });
 
-})(jQuery);
+})(jQuery);*/
+
+function main(){
+    var listRand = rand(4);
+    update_reserve_changer('mdba',listRand);
+    update_chevalet_changer('mdba',listRand);
+
+}
