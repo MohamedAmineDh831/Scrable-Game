@@ -47,37 +47,18 @@ function integ_mot(mot_obj){
 
 }
 
-function calcul_score(mot_obj){
-    console.log(grille);
-    var lettre = 0;
-    var score = 0;
-    var multiple_score = 1;
+
+function update_board(mot_obj){
     for (let i=0; i<mot_obj.mot.length; i++){
-        lettre = (mot_obj.mot[i].toUpperCase()).charCodeAt(0)-65;
-        console.log(reserve[lettre]);
-        score += reserve[lettre].Points;
         var x = mot_obj.ligne-1;
         var y = mot_obj.colonne-1;
         if(mot_obj.direction === 'h'){
-            if(grille[x][y+i] === 1){
-                score += reserve[lettre].Points;
-                grille[x][y+i] = 0;
-            }
-            else if(grille[x][y+i] === 2){
-                score += 2*(reserve[lettre].Points);
-                grille[x][y+i] = 0;
-            }
-            else if(grille[x][y+i] === 3){
-                multiple_score = 2;
-                grille[x][y+i] = 0;
-            }
-            else if(grille[x][y+i] === 4){
-                multiple_score = 3;
-                grille[x][y+i] = 0;
-            }
+            grille[x][y+i] = 0;
+        }
+        else{
+            grille[x+i][y] = 0;
         }
     }
-
-    return score*multiple_score;
 }
+
 
