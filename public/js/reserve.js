@@ -28,3 +28,71 @@ var reserve = [
     {'Lettre': 'Y', 'Quantity': 1, 'Points': 10},
     {'Lettre': 'Z', 'Quantity': 1, 'Points': 10}
 ]
+
+function get_reserve(){
+    return reserve;
+}
+
+function update_reserve_placer(li){
+    console.log(li);
+    for( var i=0; i<li.length; i++){
+        li[i] = li[i].charCodeAt(0)-65;
+        reserve[li[i]].Quantity--;
+    }
+}
+
+
+
+function update_reserve_changer(mot,li){
+   // console.log(li);
+    var lj = [];
+    for( var i=0; i<mot.length; i++){
+        lettre = (mot[i].toUpperCase()).charCodeAt(0)-65;
+        lj[i] = li[i].charCodeAt(0)-65;
+        reserve[lettre].Quantity++;
+        reserve[lj[i]].Quantity--;
+    }
+   // console.log(reserve);
+}
+
+function rand(n){
+    var rand = Math.floor(Math.random()*(reserve.length));
+    var liste_rand =[];
+    var liste_disponible = [];
+    for(var i=0; i<reserve.length; i++){
+        for(var j=0; j<reserve[i].Quantity; j++) {
+            liste_disponible.push(reserve[i].Lettre);
+        }
+    }
+    console.log(liste_disponible);
+    for(i=0; i<n; i++){
+        rand = Math.floor(Math.random()*liste_disponible.length);
+        liste_rand.push(liste_disponible[rand]);
+        liste_disponible.splice(rand,1);
+    }
+    return liste_rand;
+}
+
+function verif_reserve(mot){
+    var count = 0;
+    var verif = true;
+    for(var i = 0; i<reserve.length; i++){
+        count+=reserve[i].Quantity;
+    }
+    console.log(count);
+
+    try{
+        if(mot.length > count){
+            throw new SyntaxError('reserve is not sufisante');
+        }
+    }
+    catch (e){
+        verif = false;
+    }
+    finally {
+        return verif;
+    }
+
+}
+
+
