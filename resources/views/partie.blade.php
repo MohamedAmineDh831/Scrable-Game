@@ -17,15 +17,10 @@
                 <label for="typepartie">typepartie:</label>
                 <input type="int" name="tp" id="tp">
             </p>
-            <p>
-                <label for="user">typepartie:</label>
-                <input type="int" name="us" id="us">
-            </p>
+      
          <input type="submit" value="Submit">
         </form>
     </center>
-  
-   
-  
+ 
 </html>
  

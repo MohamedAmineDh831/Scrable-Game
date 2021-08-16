@@ -6,22 +6,106 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\nizar;
 use App\Models\play;
+use App\Models\User;
+
 class PostController extends Controller
 
 {
     //
+  
     function test(){
         return view('test');
     }
-        function index1(){
-        return view('Identification.inscrit');
+
+
+function jeu(){
+    return view('Game.game');
+}
+
+function jeu_post(Request $request){
+    return $request->input('liste_joueurs');
+}
+
+function inscrit(){
+    return view('Identification.inscrit');
+}
+
+function inscrit_post(Request $request){
+
+    $username = $request->input('Username');
+    $email = $request->input('email');
+    $password = $request->input('password');
+
+    $verifUsername = ['name'=>$username];
+    $verifEmail = ['email'=>$email];
+    $user_name = User::where($verifUsername)->get();
+    $user_email = User::where($verifEmail)->get();
+    if(sizeof($user_name)!=0){
+        dd('username deja utilisé');
+    }
+    else {
+        if(sizeof($user_email)!=0){
+            dd('email deja utilisé');
+        }
+        else {
+
+            $post = new User();
+            $post->name = $username;
+            $post->email = $email;
+            $post->password = $password;
+            if ($request->hasfile('picture')) {
+                $file = $request->file('picture');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/chat/', $filename);
+                $post->image = $filename;
+
+            } else {
+                return $request;
+                $post->image = '';
+            }
+            $post->save();
+
+            return $post;
+        }
+    }
+}
+
+function login(){
+
+    return view('Identification.login');
+}
+
+function login_post(Request $request){
+
+    $username = $request->input('Username');
+    $password = $request->input('password');
+
+    $verifUsername = ['name'=>$username];
+    $user_name = User::where($verifUsername)->get();
+
+    if(sizeof($user_name)==0){
+        dd('vous n\'avez pas de compte');
+    }
+    else if($user_name[0]->password != $password){
+        dd('mot de passe incorrect');
+    }
+    else{
+        $request->session()->forget('joueur');
+       $request->session()->push('joueur',$user_name[0]);
+       return redirect()->action([PostController::class, 'partie']);
+      
     }
 
-    function partie(){
+}
+
+    function partie(Request $request){
         return view('partie');
+        $ses=$request->session()->get('joueur');
+        return $ses;
     }
      function affichage(Request $request){
-         $play=new play();
+         $u=new User();
         
          $c=0;
         $post=new nizar();
@@ -54,14 +138,16 @@ for($i=0;$i<count($n);$i++)
     $post->typepartie=$request->input("tp");  
     $post->count=55;
     $post->save();
-    $m=$request->input('us');
-    $a=play::where('user','=',$m)->get();
-    $b=$a[0]['idpartie'];
-    $c=nizar::where('id','=',$b)->get();
-    $o=$c['count'];
-    echo 'play game';
-   return view('attendre');
-    
+    $ses=$request->session()->get('joueur');
+            
+    $k=$ses[0]->name;
+          $a=$u::where('name','=',$k)->get();
+          echo $a;
+          $f=$a[0];
+          $f->idpartie=$users[0]['id'];
+         
+          $f->save();
+    echo 'play game';   
  
  }
  $users=$n[$c];
@@ -69,77 +155,34 @@ for($i=0;$i<count($n);$i++)
 if($users['typepartie']>$users['count'])
            
            {
-            $play->user=$request->input('us');
-            $m=$request->input('us');
-
-            $play->idpartie=$users['id'];
-            $play->save();
-             $users['count']+=1;
-             $users->save();   
-               # $y=$users['id'];
-               # echo $users['id'];   
-                  $a=play::where('user','=',$m)->get();
-                  $b=$a[0]['idpartie'];
-                  $c=nizar::where('id','=',$b)->get();
-                  $o=$c[0]['count'];
-                  return view('attendre');
-                  /* $p=play::where('idpartie','=',177)->get();
-                   $u=$p[0]['idpartie'];
-                   $r=nizar::where('id','=',$u)->get();
-                   echo $r[0]['count']; */
-
+           
+            $ses=$request->session()->get('joueur');
+            
+            $k=$ses[0]->name;
+                  $a=$u::where('name','=',$k)->get();
+                  echo $a;
+                  $f=$a[0];
+                  $f->idpartie=$users['id'];
+                 
+                  $f->save();
+                  echo $f->idpartie;
+                  $users['count']+=1;
+                  $users->save();
+                  echo 'nizar';
+            
+                   
                
        
            }
           
            }
-        /* else  if(  $value['typepartie']==$value['count'])s
-           {  echo "nizar";        
-            echo $value['count'];
-               echo "eq";
-             return view('welcome');
-           }
-           /*else{
-            echo "nizar";    
-            echo $value['count'];
-            return view('welcome');
-           }
-          
-         
-          
-       
-           else
-           {
-
-            $post->typepartie=$request->input("tp");  
-            $post->count=55;
-            $post->save();
-           
-            echo $post->count;
-            
-            return view('welcome');
-           
-          
-           }
-           
-        }
-
-    
-        /*if($c)
-        {
-            $post->count+=1;
-            $post->typepartie=$request->input("tp");
-            $post->save();
-        }
-      */
-        #return view('partie',['users'=>$users]);
-        #dd("insertion valide");
+     
         }
         public function base(Request $request)
         {
-            $play=new play();
+            $play=new User();
             $user= $play->user=$request->input('usr');;
-            $a=play::where('user','=',$user)->get();
+            $a=play::where('name','=',$user)->get();
             $b=$a[0]['idpartie'];
             $c=nizar::where('id','=',$b)->get();
             $o=$c[0]['count'];

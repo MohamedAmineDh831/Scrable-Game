@@ -16,12 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/inscrit',[PostController::class,'index1'])->name('inscrit');
-Route::get('/',[PostController::class,'test'])->name('test');
+
 #Route::get('/login',[PostController::class,'index2'])->name('login');
 #Route::get('/posts',[PostController::class,'index']);
+
 Route::get('/nizar', [PostController::class, 'partie']);
 Route::post('/nizar/n', [PostController::class, 'affichage'])->name('nizar.affichage');
 Route::post('/nizar/n/base', [PostController::class, 'base'])->name('n.base');
 
 
+
+Route::get('/inscrit',[PostController::class,'inscrit'])->name('inscrit');
+Route::post('/inscrit',[PostController::class,'inscrit_post']);
+Route::get('/',[PostController::class,'jeu'])->name('jeu');
+Route::post('/',[PostController::class,'jeu_post'])->name('jeu');
+Route::get('/login',[PostController::class,'login'])->name('login');
+Route::get('/test',[PostController::class,'test'])->name('test');
+Route::post('/login',[PostController::class,'login_post']);
