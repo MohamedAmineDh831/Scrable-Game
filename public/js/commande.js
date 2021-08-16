@@ -1,6 +1,5 @@
 var commande ='';
 var joueur = 0;
-var chevalet = 'tmfdbwa';
 var Joueurs = [
     {'nom': 'Mohamed Amine', 'tour': true, 'score': 0},
     {'nom': 'Nizar', 'tour': false, 'score': 0},
@@ -77,17 +76,25 @@ function changer_tour(){
             return s.slice(s.indexOf(' ') + 1, s.length);
         }
 
-        function traitement_changer(){
-            var sac = 'abcdefghijklmnopqrstuvwxyz'
-            var rand = Math.floor(Math.random()*(sac.length));
-            var lettre = decode_changer()
-            console.log('lettres :  '+lettre);
-            for(var i=0; i<lettre.length; i++){
-                rand = Math.floor(Math.random()*28);
-                chevalet = chevalet.slice(0, chevalet.indexOf(lettre[i]))+sac[rand]+chevalet.slice(chevalet.indexOf(lettre[i])+1, chevalet.length);
-            }
+        function traitement_changer(mot){
+            update_chevalet(mot);
             changer_tour()
         }
 
 //.........................BLOC_CHANGER...............
 
+
+
+//.........................BLOC_VERIF_SYNTAXE...............
+
+function verif_syntaxe(mot){
+    if(mot === '!passer'){
+        commande = 'passer';
+    }
+    else if((mot.slice(0,8) === '!placer ')&&(mot.length>8)){
+        commande = 'placer';
+    }
+    else if((mot.slice(0,8) === '!changer ')&&(mot.length>8)){
+        commande = 'changer';
+    }
+}
