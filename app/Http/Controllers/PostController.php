@@ -168,11 +168,12 @@ if($users['typepartie']>$users['count'])
                   echo $f->idpartie;
                   $users['count']+=1;
                   $users->save();
-                  $info= $u->groupBy('idpartie');
-                  foreach($info as $val)
-                  {
-                  echo $val ;
-                  }
+            
+                  $routes = DB::table('users')
+                  ->select(['name', 'email'])
+                  ->groupBy(['idpartie'])
+                  ->get(); 
+                 dd($routes);
             
                    
                
