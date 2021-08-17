@@ -160,20 +160,25 @@ if($users['typepartie']>$users['count'])
             
             $k=$ses[0]->name;
                   $a=$u::where('name','=',$k)->get();
-                  echo $a;
+                 
                   $f=$a[0];
                   $f->idpartie=$users['id'];
                  
                   $f->save();
-                  echo $f->idpartie;
+               
                   $users['count']+=1;
                   $users->save();
             
-                  $routes = DB::table('users')
-                  ->select(['name', 'email'])
-                  ->groupBy(['idpartie'])
-                  ->get(); 
-                 dd($routes);
+                 # $routes = DB::select('select * from users GROUP BY idpartie');
+                  $routes =DB::table('users')
+->groupBy('idpartie')
+->get();
+$v=DB::select('SELECT name
+FROM users
+GROUP BY idpartie
+ORDER BY idpartie');
+
+                   dd( $v);
             
                    
                
