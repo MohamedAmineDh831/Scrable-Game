@@ -113,7 +113,7 @@ function login_post(Request $request){
         $k=$request->input("tp");
        
         #$users = DB::table('nizars')->select('id','typepartie')->get();
-        $users = DB::select('select * from nizars where typepartie>count and typepartie=? ',[$k]);
+       # $users = DB::select('select * from nizars where typepartie>count and typepartie=? ',[$k]);
         #$users = DB::select('select count from  nizars where typepartie=10');
         $n=nizar::where('typepartie','=',$k)->get();
  
@@ -142,9 +142,9 @@ for($i=0;$i<count($n);$i++)
             
     $k=$ses[0]->name;
           $a=$u::where('name','=',$k)->get();
-          echo $a;
+       
           $f=$a[0];
-          $f->idpartie=$users[0]['id'];
+          $f->idpartie=$n[0]['id'];
          
           $f->save();
     echo 'play game';   
@@ -168,17 +168,10 @@ if($users['typepartie']>$users['count'])
                
                   $users['count']+=1;
                   $users->save();
-            
+                 $ammar=DB::select('select * from users where idpartie=?',[202]);
                  # $routes = DB::select('select * from users GROUP BY idpartie');
-                  $routes =DB::table('users')
-->groupBy('idpartie')
-->get();
-$v=DB::select('SELECT name
-FROM users
-GROUP BY idpartie
-ORDER BY idpartie');
-
-                   dd( $v);
+        
+                   dd( $ammar);
             
                    
                
