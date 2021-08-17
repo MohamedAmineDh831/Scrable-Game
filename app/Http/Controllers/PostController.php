@@ -168,7 +168,11 @@ if($users['typepartie']>$users['count'])
                   echo $f->idpartie;
                   $users['count']+=1;
                   $users->save();
-                  echo 'nizar';
+                  $info= $u->groupBy('idpartie');
+                  foreach($info as $val)
+                  {
+                  echo $val ;
+                  }
             
                    
                
