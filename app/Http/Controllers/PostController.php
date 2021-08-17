@@ -100,10 +100,12 @@ function login_post(Request $request){
 }
 
     function partie(Request $request){
+       
+          
         return view('partie');
-        $ses=$request->session()->get('joueur');
-        return $ses;
+      
     }
+   
      function affichage(Request $request){
          $u=new User();
         
@@ -111,21 +113,8 @@ function login_post(Request $request){
         $post=new nizar();
         $post->typepartie=$request->input("tp");
         $k=$request->input("tp");
-       
-        #$users = DB::table('nizars')->select('id','typepartie')->get();
-       # $users = DB::select('select * from nizars where typepartie>count and typepartie=? ',[$k]);
-        #$users = DB::select('select count from  nizars where typepartie=10');
+   
         $n=nizar::where('typepartie','=',$k)->get();
- 
-    
-
- /*if(!count($n))
- {
-    $post->typepartie=$request->input("tp");  
-    $post->count=55;
-    $post->save();
- }
- */
 $c=0;
 for($i=0;$i<count($n);$i++)
 {
@@ -138,20 +127,13 @@ for($i=0;$i<count($n);$i++)
     $post->typepartie=$request->input("tp");  
     $post->count=55;
     $post->save();
-    $ses=$request->session()->get('joueur');
-            
-    $k=$ses[0]->name;
-          $a=$u::where('name','=',$k)->get();
-       
-          $f=$a[0];
-          $f->idpartie=$n[0]['id'];
-         
-          $f->save();
-    echo 'play game';   
+    return view('test');
+     
+
  
  }
  $users=$n[$c];
-{
+
 if($users['typepartie']>$users['count'])
            
            {
@@ -170,30 +152,34 @@ if($users['typepartie']>$users['count'])
                   $users->save();
                  $ammar=DB::select('select * from users where idpartie=?',[202]);
                  # $routes = DB::select('select * from users GROUP BY idpartie');
-        
-                   dd( $ammar);
-            
+                 echo 'rhugkiug';
+             return view('test');
+          
                    
                
        
            }
           
-           }
-     
         }
+     
+  
+        
         public function base(Request $request)
         {
-            $play=new User();
-            $user= $play->user=$request->input('usr');;
-            $a=play::where('name','=',$user)->get();
-            $b=$a[0]['idpartie'];
-            $c=nizar::where('id','=',$b)->get();
-            $o=$c[0]['count'];
-         
-            return view('liste',[
-                'o'=>$o
-            ]);
-
+          
+            $ses=$request->session()->get('joueur');
+            $play=new User();  
+            $u=new nizar();  
+            $k=$ses[0]->name;
+            $yosr=$play::where('name','=',$k)->get();
+            $you=$yosr[0]['idpartie'];
+            $n=$u::where('id','=',$you)->get();
+           $s= $n[0]['count'];
+           echo $s;
+           if($s==61)
+            return view('liste');
+            else
+            return view('welcome');
+    
         }
-   
 }

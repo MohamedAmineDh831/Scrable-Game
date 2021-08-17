@@ -21,9 +21,11 @@ use Illuminate\Support\Facades\Route;
 #Route::get('/posts',[PostController::class,'index']);
 
 Route::get('/nizar', [PostController::class, 'partie']);
+Route::post('/nizar', [PostController::class, 'partie']);
 Route::post('/nizar/n', [PostController::class, 'affichage'])->name('nizar.affichage');
-Route::post('/nizar/n/base', [PostController::class, 'base'])->name('n.base');
-
+Route::get('/nizar/n', [PostController::class, 'affichage'])->name('nizar.affichage');
+Route::get('nizar/n/base', [PostController::class, 'base'])->name('n.base');
+Route::post('nizar/n/base', [PostController::class, 'base'])->name('n.base');
 
 
 Route::get('/inscrit',[PostController::class,'inscrit'])->name('inscrit');
