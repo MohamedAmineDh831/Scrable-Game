@@ -49,11 +49,7 @@
         </ul>
     </div>
 </nav>
-<script type="text/javascript">
-        setTimeout(function(){
-            location.reload();
-        },1500);
-    </script>
+
 @yield('content')
 <script type="text/javascript" src="{{asset('js/navbar.js')}}"></script>
 

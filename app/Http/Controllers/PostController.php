@@ -125,12 +125,10 @@ for($i=0;$i<count($n);$i++)
  if($c==count($n))
  {
     $post->typepartie=$request->input("tp");  
-    $post->count=55;
+    $post->count=0;
     $post->save();
+    $c=$c-1;
     return view('test');
-     
-
- 
  }
  $users=$n[$c];
 
@@ -150,9 +148,9 @@ if($users['typepartie']>$users['count'])
                
                   $users['count']+=1;
                   $users->save();
-                 $ammar=DB::select('select * from users where idpartie=?',[202]);
-                 # $routes = DB::select('select * from users GROUP BY idpartie');
-                 echo 'rhugkiug';
+           
+                
+
              return view('test');
           
                    
@@ -166,7 +164,7 @@ if($users['typepartie']>$users['count'])
         
         public function base(Request $request)
         {
-          
+           
             $ses=$request->session()->get('joueur');
             $play=new User();  
             $u=new nizar();  
@@ -175,11 +173,26 @@ if($users['typepartie']>$users['count'])
             $you=$yosr[0]['idpartie'];
             $n=$u::where('id','=',$you)->get();
            $s= $n[0]['count'];
-           echo $s;
+        
+         
            if($s==61)
-            return view('liste');
+           {    
+           
+               $t=$play::where('idpartie','=',$you)->get();
+               foreach($t as $c)
+               echo($c);
+             
+           }
             else
-            return view('welcome');
+            { 
+               
+            return view('attendre',
+        [
+            'name'=>$k,
+            'idpartie'=>$you,
+            'count'=>$s
+
+        ]);}
     
         }
 }
