@@ -177,7 +177,7 @@ if($users['typepartie']>$users['count'])
          
            if($s==61)
            {    
-           
+               
                $t=$play::where('idpartie','=',$you)->get();
                foreach($t as $c)
                echo($c);

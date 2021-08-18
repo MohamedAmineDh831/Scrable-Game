@@ -15,7 +15,7 @@
                     <div class="clear"> </div>
                     <h3>username:{{$name}}</h3>
                     <h3>idpartie:{{$idpartie}}</h3>
-                    <h3>il vous reste:{{$count}}</h3>
+                    <h3>nombre de joueurs:{{$count}}</h3>
              
                 </form>
             
