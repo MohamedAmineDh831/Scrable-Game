@@ -70,9 +70,20 @@ function changer_tour(){
 
 
         }
-        function traitement_placer(){
+        function traitement_placer(mot_obj){
+            var listRand = [];
+            if (mot_obj) {
+                if ((verif_board(mot_obj).verif) && (verif_chevalet(verif_board(mot_obj).chev)) && verif_reserve(mot_obj.mot)&&(verif_board(mot_obj).verif)) {
+                    listRand = rand(verif_board(mot_obj).chev.length);
+                    update_reserve_placer(listRand);
+                    integ_mot(mot_obj);
+                    update_chevalet(verif_board(mot_obj).chev, listRand);
+                    update_board(mot_obj);
 
+                }
 
+            }
+            changer_tour()
         }
 
 //.........................BLOC_PLACER.................
@@ -84,14 +95,16 @@ function changer_tour(){
 
         //lorsque la commande passée est changer et après la vérification de syntaxe, ce bloc s'occupe de tous les traitements nécéssaires
 
-        function decode_changer(){
-            var s = '!changer mwb';
+        function decode_changer(s){
+            //var s = '!changer mwb';
             return s.slice(s.indexOf(' ') + 1, s.length);
         }
 
         function traitement_changer(mot){
-            update_chevalet(mot);
-            changer_tour()
+            var listRand = rand(mot.length);
+            update_chevalet(mot,listRand);
+            update_reserve_changer(mot,listRand);
+            changer_tour();
         }
 
 //.........................BLOC_CHANGER...............
@@ -107,7 +120,7 @@ function verif_syntaxe(mot){
             commande = 'passer';
         } else if ((mot.slice(0, 8) === '!placer ') && (mot.length > 8)) {
             commande = 'placer';
-        } else if ((mot.slice(0, 8) === '!changer ') && (mot.length > 8)) {
+        } else if ((mot.slice(0, 9) === '!changer ') && (mot.length > 8)) {
             commande = 'changer';
         }
         else {

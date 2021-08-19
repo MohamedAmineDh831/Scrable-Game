@@ -20,24 +20,18 @@ function main() {
     $('#action').click(function () {
         var mot = $("#commande").val();
         var mot_obj = {};
-        var listRand = [];
+        //var listRand = [];
         verif_syntaxe(mot);
         if (commande === 'placer') {
             mot_obj = decode_placer(mot);
-            if (mot_obj) {
-                if ((verif_board(mot_obj).verif) && (verif_chevalet(verif_board(mot_obj).chev)) && verif_reserve(mot_obj.mot)&&(verif_board(mot_obj).verif)) {
-                    listRand = rand(verif_board(mot_obj).chev.length);
-                    update_reserve_placer(listRand);
-                    integ_mot(mot_obj);
-                    update_chevalet(verif_board(mot_obj).chev, listRand);
-                    update_board(mot_obj);
-
-                }
-
-            }
+            traitement_placer(mot_obj)
+        }
+        else if(commande === 'changer'){
+            mot = decode_changer(mot);
+            traitement_changer(mot);
         }
         console.log('chevalet :'+chevalet);
-        console.log('li :'+listRand);
+       // console.log('li :'+listRand);
         console.log(reserve);
     });
 
