@@ -34,10 +34,10 @@ function get_reserve(){
 }
 
 function update_reserve_placer(li){
-    console.log(li);
+    var Lj = [];
     for( var i=0; i<li.length; i++){
-        li[i] = li[i].charCodeAt(0)-65;
-        reserve[li[i]].Quantity--;
+        Lj[i] = li[i].charCodeAt(0)-65;
+        reserve[Lj[i]].Quantity--;
     }
 }
 
@@ -64,7 +64,6 @@ function rand(n){
             liste_disponible.push(reserve[i].Lettre);
         }
     }
-    console.log(liste_disponible);
     for(i=0; i<n; i++){
         rand = Math.floor(Math.random()*liste_disponible.length);
         liste_rand.push(liste_disponible[rand]);

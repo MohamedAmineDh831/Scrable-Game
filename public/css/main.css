@@ -1,0 +1,217 @@
+
+
+div.surroundShade table,
+div.bottomShade table
+{
+    box-shadow: 0 0 1em #000000;
+    -webkit-box-shadow: 0 0 1em #000000;
+    -moz-box-shadow: 0 0 1em #000000;
+    -o-box-shadow: 0 0 1em #000000;
+}
+
+div.tableDivWrap table
+{
+    /*
+    table-layout: fixed;
+    */
+
+    border-collapse: separate; /* collapse ==== zero 'cellspacing' */
+    border-spacing: 0 0; /* horizontal, vertical */
+
+    border-width: 0.5em;
+    border-style: solid;
+    border-color:  #54534A;
+
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 0.5em;
+
+    background-color: #AAA38E; /* COLOR_CODE: GRID-OUTLINE */
+}
+
+
+
+div.tableDivWrap td, div.tableDivWrap th
+{
+    margin: 0;
+    padding: 0; /* table 'cellpadding' */
+
+    border: none;
+
+    /*
+    text-align: center;
+    vertical-align: middle;
+    */
+
+    white-space: normal;
+    overflow: hidden;
+    /*
+    text-overflow: ellipsis;
+    */
+
+border-width: 0.15em;
+border-style: dotted;
+
+/* required for filling rounded corners of tiles */
+background-color: #BEB9A6; /* COLOR_CODE: GRID-SQUARES */
+}
+
+div.tableDivWrap td.Normal
+{
+border-style: solid;
+border-color: #AAA38E; /* COLOR_CODE: GRID-OUTLINE */
+}
+
+div.tableDivWrap td.DoubleWord,
+div.tableDivWrap td.TripleWord,
+div.tableDivWrap td.DoubleLetter,
+div.tableDivWrap td.TripleLetter
+{
+/* required for background of dotted borders */
+background-color: #AAA38E; /* COLOR_CODE: GRID-OUTLINE */
+}
+
+div.tableDivWrap td.DoubleWord
+{
+border-color: #FBBBB9;
+}
+
+div.tableDivWrap td.TripleWord
+{
+border-color: #F75D59;
+}
+
+div.tableDivWrap td.DoubleLetter
+{
+border-color: #A0CFEC;
+}
+
+div.tableDivWrap td.TripleLetter
+{
+border-color: #157DEC;
+}
+
+div.tableDivWrap td div
+{
+display: block;
+
+margin: 0;
+padding: 0;
+
+border: none;
+
+/*
+text-align: center;
+vertical-align: middle;
+*/
+
+width: 2.5em;
+height: 2em;
+
+border-style: solid;
+border-width: 0.2em;
+
+background-color: red;
+
+cursor: crosshair;
+
+color: #333333;
+}
+
+div.tableDivWrap td div a
+{
+-webkit-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+
+text-decoration: none;
+
+display: block;
+
+margin: 0;
+padding: 0;
+
+border: none;
+
+text-align: center;
+/* vertical-align: middle; */
+}
+
+@-webkit-keyframes glow
+{
+0% {
+border: 0.15em solid #FF9900;
+}
+100% {
+border: 0.15em solid #DC143C;
+}
+}
+
+@-moz-keyframes glow
+{
+0% {
+border: 0.15em solid #FF9900;
+}
+100% {
+border: 0.15em solid #DC143C;
+}
+}
+
+@keyframes glow
+{
+0% {
+border: 0.15em solid #FFFFFF;
+}
+100% {
+border: 0.15em solid #333333;
+}
+}
+
+div.tableDivWrap td.DoubleWord div
+{
+background-color: #FBBBB9;
+
+border-color: #FBBBB9;
+
+color: #F75D59;
+}
+
+div.tableDivWrap td.TripleWord div
+{
+background-color: #F75D59;
+
+border-color: #F75D59;
+
+color: #8B0000;
+}
+
+div.tableDivWrap td.Normal div
+{
+background-color: #BEB9A6; /* COLOR_CODE: GRID-SQUARES */
+
+border-color: #BEB9A6; /* COLOR_CODE: GRID-SQUARES */
+}
+
+div.tableDivWrap td.DoubleLetter div
+{
+background-color: #A0CFEC;
+
+border-color: #A0CFEC;
+
+color: #157DEC;
+}
+
+div.tableDivWrap td.TripleLetter div
+{
+background-color: #157DEC;
+
+border-color: #157DEC;
+
+color: #000080;
+}
+
+

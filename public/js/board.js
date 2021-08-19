@@ -24,9 +24,12 @@ function initialiser_grille(){
         for (var i = 0; i < 15; i++) {
             id = "BoardSquareOrTile_" +i+ "x" +j;
             //console.log(id);
-            $('#' + id)[0].innerText = 'A';
+            $('#' + id)[0].innerText = '';
         }
     }
+   /* id = "BoardSquareOrTile_" +4+ "x" +6;
+    console.log(id);
+    $('#' + id)[0].innerText = 'm';*/
 }
 
 function integ_mot(mot_obj){
@@ -83,16 +86,15 @@ function verif_board(mot_obj){
                 }
             }
             else{
-                id ="BoardSquareOrTile_"+(mot_obj.colonne-1)+"x"+(mot_obj.ligne+i-1);
+                id ="BoardSquareOrTile_"+y+"x"+(x+i);
                 if((grille[x+i][y] === -1)&&($('#'+id)[0].innerText !== mot_obj.mot[i])){
-                     throw SyntaxError('emplacement incorrecte');
+                     throw SyntaxError('emplacement incorrecte'+i);
                 }
                 else if(grille[x+i][y] !== -1){
                     ch +=mot_obj.mot[i];
                 }
             }
         }
-        console.log(ch);
         if(ch.length === mot_obj.mot.length){
             throw SyntaxError('mot nest pas liée');
         }

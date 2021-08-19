@@ -29,32 +29,45 @@ function changer_tour(){
 
         //lorsque la commande passée est placer et après la vérification de syntaxe, ce bloc s'occupe de tous les traitements nécéssaires
 
-        function decode_placer(){
-            var s = '!placer g15v bonjour';
+        function decode_placer(s){
+            try {
+            //var s = '!placer g15v bonjour';
             var mot = s.slice(s.lastIndexOf(' ')+1, s.length);
             var ligne = s.charCodeAt(8)-96;
             var colonne = 0;
             var direction = '';
-            if((s[10] === 'v')||(s[10] === 'h')){
-                colonne = parseInt(s[9]);
-                if(s[10] === 'v'){
-                    direction = 'v';
+            var mot_obj = {};
+
+                if ((s[10] === 'v') || (s[10] === 'h')) {
+                    colonne = parseInt(s[9]);
+                    if (s[10] === 'v') {
+                        direction = 'v';
+                    } else {
+                        direction = 'h';
+                    }
                 }
-                else{
-                    direction = 'h';
+                else {
+                    colonne = parseInt(s.slice(9, 11));
+                    if (s[11] === 'v') {
+                        direction = 'v';
+                    } else {
+                        direction = 'h';
+                    }
+                }
+                mot_obj = {'mot': mot, 'ligne': ligne, 'colonne': colonne, 'direction': direction};
+                if((colonne>15)||(ligne>15)){
+                    throw SyntaxError('board insufisante');
                 }
             }
-            else{
-                colonne = parseInt(s.slice(9,11));
-                if(s[11] === 'v'){
-                    direction = 'v';
-                }
-                else{
-                    direction = 'h';
-                }
+            catch (e){
+                console.log(e.message);
+                mot_obj = null;
             }
-            changer_tour()
-            return {'mot': mot, 'ligne': ligne, 'colonne': colonne, 'direction': direction};
+            finally {
+                changer_tour()
+                return mot_obj;
+            }
+
 
         }
         function traitement_placer(){
@@ -88,13 +101,21 @@ function changer_tour(){
 //.........................BLOC_VERIF_SYNTAXE...............
 
 function verif_syntaxe(mot){
-    if(mot === '!passer'){
-        commande = 'passer';
+    try {
+
+        if (mot === '!passer') {
+            commande = 'passer';
+        } else if ((mot.slice(0, 8) === '!placer ') && (mot.length > 8)) {
+            commande = 'placer';
+        } else if ((mot.slice(0, 8) === '!changer ') && (mot.length > 8)) {
+            commande = 'changer';
+        }
+        else {
+            throw SyntaxError('commande invalide');
+        }
     }
-    else if((mot.slice(0,8) === '!placer ')&&(mot.length>8)){
-        commande = 'placer';
-    }
-    else if((mot.slice(0,8) === '!changer ')&&(mot.length>8)){
-        commande = 'changer';
+    catch (e){
+        console.log(e.message);
+        commande = null;
     }
 }
