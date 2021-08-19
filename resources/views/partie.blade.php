@@ -2,13 +2,15 @@
 @section('content')
     <!-- main -->
     <div class="main-w3layouts wrapper">
+        <h1>Choisir le type de partie</h1>
         <div class="main-agileinfo">
             <div class="agileits-top">
-                <form action="{{route('n.base')}}" method="post">
+                <form action="{{route('nizar.affichage')}}" method="post">
                     @csrf
-                  <h3>Félicitation votre inscription est validée</h3>
+                    <input class="text" type="text" name="tp" placeholder="typepartie" required="">
+                    
                     <div class="clear"> </div>
-                    <input type="submit" value="Suivant">
+                    <input type="submit" value="Valider">
                 </form>
             
             </div>

@@ -1,14 +1,22 @@
 @extends('welcome')
 @section('content')
     <!-- main -->
+    <script type="text/javascript">
+        setTimeout(function(){
+            location.reload();
+        },15000);
+    </script>
     <div class="main-w3layouts wrapper">
         <div class="main-agileinfo">
             <div class="agileits-top">
-                <form action="{{route('n.base')}}" method="post">
+             
                     @csrf
-                  <h3>Félicitation votre inscription est validée</h3>
+                  <h3>Bienvenue</h3>
                     <div class="clear"> </div>
-                    <input type="submit" value="Suivant">
+                    <h3>username:{{$name}}</h3>
+                    <h3>idpartie:{{$idpartie}}</h3>
+                    <h3>nombre de joueurs:{{$count}}</h3>
+             
                 </form>
             
             </div>
