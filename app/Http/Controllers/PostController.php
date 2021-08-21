@@ -125,7 +125,7 @@ for($i=0;$i<count($n);$i++)
  if($c==count($n))
  {
     $post->typepartie=$request->input("tp");  
-    $post->count=0;
+    $post->count=1;
     $post->save();
     $c=$c-1;
     return view('test');
