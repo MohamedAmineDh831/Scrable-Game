@@ -214,7 +214,7 @@ $tab=[];
             
                 $request->session()->push($v,$c['name']); 
                $ses=$request->session()->get($p);
-               dd ($ses);
+           
                }
              
            }
