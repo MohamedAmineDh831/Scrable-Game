@@ -204,7 +204,7 @@ $p=0;
                    $v="joueur $h";
                 $request->session()->push($v,$s);  
                 $ses=$request->session()->get($v);
-                echo $a;
+                echo $v;
                echo($c);
                }
            }
