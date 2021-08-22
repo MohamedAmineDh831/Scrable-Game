@@ -194,19 +194,29 @@ if($users['typepartie']>$users['count'])
          
            if($s==$n[0]['typepartie'])
            {    
+       
             $request->session()->push('idpartie',$a);
                $t=$play::where('idpartie','=',$you)->get();
 $p=0;
+$tab=[];
                foreach($t as $c)
                {
                    $p+=1;
                    $h=(string)$p;
-                   $v="joueur $h";
-                $request->session()->push($v,$s);  
-                $ses=$request->session()->get($v);
-                echo $v;
-               echo($c);
+                   $v=("joueur$h");
+                   array_push($tab,$v);
+                   
+                  # $request->session()->forget($v);
+    
                }
+               foreach($tab as $p)
+               {
+            
+                $request->session()->push($v,$c['name']); 
+               $ses=$request->session()->get($p);
+               dd ($ses);
+               }
+             
            }
             else
             { 
