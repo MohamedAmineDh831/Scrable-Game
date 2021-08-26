@@ -115,6 +115,7 @@ function login_post(Request $request){
         $k=$request->input("tp");
    
         $n=nizar::where('typepartie','=',$k)->get();
+       
 $c=0;
 for($i=0;$i<count($n);$i++)
 {
@@ -125,9 +126,24 @@ for($i=0;$i<count($n);$i++)
  if($c==count($n))
  {
     $post->typepartie=$request->input("tp");  
-    $post->count=0;
+    $post->count=1;
     $post->save();
-    $c=$c-1;
+    $c=$c-1;   
+    $ses=$request->session()->get('joueur');
+    
+    $k1=$ses[0]->name;
+   
+          $a=$u::where('name','=',$k1)->get();
+          $k=$request->input("tp");
+          $n1=nizar::where('typepartie','=',$k)->get();
+          $users=$n1[count($n1)-1];
+          $f=$a[0];
+          $f->idpartie=$users['id'];
+         
+          $f->save();
+         
+       
+            
     return view('test');
  }
  $users=$n[$c];
@@ -135,7 +151,7 @@ for($i=0;$i<count($n);$i++)
 if($users['typepartie']>$users['count'])
            
            {
-           
+            $request->session()->push('idpartie',$users['id']);
             $ses=$request->session()->get('joueur');
             
             $k=$ses[0]->name;
@@ -173,14 +189,33 @@ if($users['typepartie']>$users['count'])
             $you=$yosr[0]['idpartie'];
             $n=$u::where('id','=',$you)->get();
            $s= $n[0]['count'];
+           $a=$n[0]['id'];
         
          
-           if($s==61)
+           if($s==$n[0]['typepartie'])
            {    
-               
+       
+            $request->session()->push('idpartie',$a);
                $t=$play::where('idpartie','=',$you)->get();
+$p=0;
+$tab=[];
                foreach($t as $c)
-               echo($c);
+               {
+                   $p+=1;
+                   $h=(string)$p;
+                   $v=("joueur$h");
+                   array_push($tab,$v);
+                   
+                  # $request->session()->forget($v);
+    
+               }
+               foreach($tab as $p)
+               {
+            
+                $request->session()->push($v,$c['name']); 
+               $ses=$request->session()->get($p);
+           
+               }
              
            }
             else
